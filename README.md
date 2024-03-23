@@ -10,10 +10,15 @@ Run the following command:
 npx create-turbo@latest
 ```
 
+## My Notes
+
 ### To create react component auto use - turbo generator
 ```sh
 npm run generate:component
 ```
+
+- Inorder to build the projects sequentially turbo.json is used.
+- It acts as a orchestrator
 
 ## What's inside?
 
