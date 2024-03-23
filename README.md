@@ -10,6 +10,11 @@ Run the following command:
 npx create-turbo@latest
 ```
 
+### To create react component auto use - turbo generator
+```sh
+npm run generate:component
+```
+
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
@@ -68,6 +73,9 @@ Next, you can link your Turborepo to your Remote Cache by running the following 
 ```
 npx turbo link
 ```
+
+
+
 
 ## Useful Links
 
