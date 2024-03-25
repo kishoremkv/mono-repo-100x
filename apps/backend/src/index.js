@@ -22788,10 +22788,10 @@ var require_response = __commonJS({
     var mime = send.mime;
     var resolve = path.resolve;
     var vary = require_vary();
-    var urlParse = require("url").parse;
     var res = Object.create(http.ServerResponse.prototype);
     module2.exports = res;
     var charsetRegExp = /;\s*charset\s*=/;
+    var schemaAndHostRegExp = /^(?:[a-zA-Z][a-zA-Z0-9+.-]*:)?\/\/[^\\\/\?]+/;
     res.status = function status(code) {
       if ((typeof code === "string" || Math.floor(code) !== code) && code > 99 && code < 1e3) {
         deprecate("res.status(" + JSON.stringify(code) + "): use res.status(" + Math.floor(code) + ") instead");
@@ -23148,24 +23148,16 @@ var require_response = __commonJS({
       return this;
     };
     res.location = function location(url) {
-      var loc = String(url);
+      var loc;
       if (url === "back") {
         loc = this.req.get("Referrer") || "/";
+      } else {
+        loc = String(url);
       }
-      var lowerLoc = loc.toLowerCase();
-      var encodedUrl = encodeUrl(loc);
-      if (lowerLoc.indexOf("https://") === 0 || lowerLoc.indexOf("http://") === 0) {
-        try {
-          var parsedUrl = urlParse(loc);
-          var parsedEncodedUrl = urlParse(encodedUrl);
-          if (parsedUrl.host !== parsedEncodedUrl.host) {
-            return this.set("Location", loc);
-          }
-        } catch (e) {
-          return this.set("Location", loc);
-        }
-      }
-      return this.set("Location", encodedUrl);
+      var m = schemaAndHostRegExp.exec(loc);
+      var pos = m ? m[0].length + 1 : 0;
+      loc = loc.slice(0, pos) + encodeUrl(loc.slice(pos));
+      return this.set("Location", loc);
     };
     res.redirect = function redirect(url) {
       var address = url;
@@ -23505,12 +23497,19 @@ var require_express2 = __commonJS({
 
 // src/index.ts
 var import_express = __toESM(require_express2());
+
+// ../../packages/common/src/index.ts
+var VALUE = "Kishore M K V";
+
+// src/index.ts
 var app = (0, import_express.default)();
+console.log(VALUE);
 app.get("/", (req, res) => {
   res.json({
     message: "Hello World!"
   });
 });
+app.listen(7e3);
 /*! Bundled license information:
 
 depd/index.js:

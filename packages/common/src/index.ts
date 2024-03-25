@@ -1,0 +1,1 @@
+export const VALUE = "Kishore M K V"
