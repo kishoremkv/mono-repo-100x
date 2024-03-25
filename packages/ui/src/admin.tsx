@@ -1,6 +1,6 @@
 export function Admin()
 {
-    return <div> 
+    return <div>
         Hello Admin
     </div>
 }

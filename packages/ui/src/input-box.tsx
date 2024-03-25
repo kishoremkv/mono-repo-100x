@@ -1,8 +1,7 @@
-export const InputBox = ({ children }: { children: React.ReactNode }) => {
+export const InputBox = () => {
   return (
     <div>
       <h1>InputBox Component</h1>
-      {children}
     </div>
   );
 };
